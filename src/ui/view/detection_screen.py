@@ -5,13 +5,13 @@ from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import QLabel, QVBoxLayout, QDialog
 
 from src.ui.model.disease import Disease
-from src.ui.ui_module import icon_folder, customize_widget
+from src.module.ui_module import icon_folder, customize_widget
 
 
 # gerekli modüller import ediliyor.
 
 
-class DetectionScreen(QDialog): # puanlanmış yorumları gösteren pencere
+class DetectionScreen(QDialog):
     def __init__(self):
         super().__init__()
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowContextHelpButtonHint)
@@ -51,4 +51,4 @@ class DetectionScreen(QDialog): # puanlanmış yorumları gösteren pencere
         self.setLayout(self.layout)
         self.setFixedSize(x,y)
         self.setWindowTitle("HASTALIK TEŞHİSİ")
-        self.setWindowIcon(QIcon(icon_folder + "comment_icon.png"))
+        self.setWindowIcon(QIcon(icon_folder + "glasses.png"))

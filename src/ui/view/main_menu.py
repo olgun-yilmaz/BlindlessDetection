@@ -1,14 +1,12 @@
-import os
-import numpy as np
 import tkinter as tk
 from tkinter import filedialog
 
-from PyQt5.QtCore import QSize, Qt
+from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QIcon, QPixmap
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QCheckBox, QMessageBox, QLabel
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QCheckBox, QLabel
 
-from src.ui.detection_screen import DetectionScreen
-from src.ui.ui_module import set_checkbox_icon, icon_folder, customize_widget, get_features
+from src.ui.view.detection_screen import DetectionScreen
+from src.module.ui_module import set_checkbox_icon, icon_folder, customize_widget, get_features
 
 
 # gerekli modüller import ediliyor.
@@ -90,5 +88,5 @@ class MainMenu(QWidget):  # kullanıcının ilk karşılaştığı pencere
         self.setLayout(v_box)
         self.setWindowTitle("BLINDLESS DETECTION")
         self.setFixedSize(x, y)
-        self.setWindowIcon(QIcon("analysis_icon.png"))
+        self.setWindowIcon(QIcon(icon_folder+"doctor.png"))
         self.show()
