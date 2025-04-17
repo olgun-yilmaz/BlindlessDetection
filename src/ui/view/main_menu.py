@@ -75,7 +75,7 @@ class MainMenu(QWidget):  # kullanıcının ilk karşılaştığı pencere
         detection_screen.exec_()
 
     def init_ui(self):
-        x, y = 1600, 900  # pencere boyutu
+        x,y = 1600,900  # pencere boyutu
         button_size = 100  # buton ikonu boyutu
 
         background = QLabel(self)

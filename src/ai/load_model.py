@@ -59,6 +59,13 @@ class LoadModel:
         # Tahmin yap
         predictions = self.model.predict(img_array)
 
-        return predictions.argmax() # en yüksek tahmin edilen sınıf
+        max_value = np.max(predictions)
+
+        if max_value > 0.8:
+            pred = predictions.argmax()
+        else:
+            pred = -1
+
+        return pred # en yüksek tahmin edilen sınıf
 
 
