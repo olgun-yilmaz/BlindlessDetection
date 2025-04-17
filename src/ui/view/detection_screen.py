@@ -1,10 +1,9 @@
-import random
-
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import QLabel, QVBoxLayout, QDialog
 
 from src.ui.model.disease import Disease
+from src.ai.load_model import LoadModel
 from src.module.ui_module import icon_folder, customize_widget
 
 
@@ -12,20 +11,20 @@ from src.module.ui_module import icon_folder, customize_widget
 
 
 class DetectionScreen(QDialog):
-    def __init__(self):
+    def __init__(self,path,model):
         super().__init__()
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowContextHelpButtonHint)
 
         self.layout = QVBoxLayout()
 
-        self.detected_disease = self.get_random_disease()
+        self.detected_disease = self.get_random_disease(path,model)
 
         self.init_ui()
 
 
-    def get_random_disease(self):
-        random_disease = random.randint(0,5)
-        file_name = f"disease_{random_disease}"
+    def get_random_disease(self,path,model):
+        disease = LoadModel(model).get_disease(path)
+        file_name = f"disease_{disease}"
         image = f"{icon_folder}/{file_name}.jpg"
 
         with open(f"src/ui/disease_info/{file_name}.txt","r",encoding="utf-8") as file:

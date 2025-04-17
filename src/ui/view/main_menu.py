@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QCheckBox, QLabel
 
 from src.ui.view.detection_screen import DetectionScreen
 from src.module.ui_module import set_checkbox_icon, icon_folder, customize_widget, get_features
+from src.ui.view.loading_dialog import LoadingDialog
 
 
 # gerekli modüller import ediliyor.
@@ -16,6 +17,12 @@ class MainMenu(QWidget):  # kullanıcının ilk karşılaştığı pencere
     def __init__(self):
         super().__init__()
         self.init_ui()
+        self.model = None
+
+    def get_model(self):
+        loader_app = LoadingDialog()
+        loader_app.exec_()
+        return loader_app.model
 
     def open_file(self):  # dosya işlemi yapan fonksiyon
         root = tk.Tk()
@@ -26,7 +33,10 @@ class MainMenu(QWidget):  # kullanıcının ilk karşılaştığı pencere
         if not path:  # dosya var mı?
             return
 
-        self.go_to_detection_screen()
+        if self.model is None:
+            self.model = self.get_model()
+
+        self.go_to_detection_screen(path)
 
 
     def click(self):  # seçme butonlarına tıklandığında çağrılan fonksiyon
@@ -60,8 +70,8 @@ class MainMenu(QWidget):  # kullanıcının ilk karşılaştığı pencere
         return check_box
 
 
-    def go_to_detection_screen(self):
-        detection_screen = DetectionScreen()  # analiz sonucunu gösteren pencere
+    def go_to_detection_screen(self,path):
+        detection_screen = DetectionScreen(path,self.model)  # analiz sonucunu gösteren pencere
         detection_screen.exec_()
 
     def init_ui(self):
