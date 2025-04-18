@@ -15,7 +15,7 @@ class LoadModel:
     def get_model(self):
         from keras.saving.save import load_model
         model_name = "new_model.h5"
-        model = load_model('output/' + model_name)
+        model = load_model('models/' + model_name)
         return model
 
     def get_disease(self,path):
