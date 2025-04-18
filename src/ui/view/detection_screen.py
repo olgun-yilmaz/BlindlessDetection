@@ -26,7 +26,6 @@ class DetectionScreen(QDialog):
         if disease_id not in range(0,5):
             disease_id = 5
 
-        disease_id = random.randint(0,5)
         file_name = f"disease_{disease_id}"
         image = f"{icon_folder}/{file_name}.jpg"
 
