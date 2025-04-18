@@ -19,24 +19,27 @@ class LoadModel:
         return model
 
     def get_disease(self,path):
-        img = cv2.imread(path, cv2.IMREAD_COLOR)
-        final_img = apply_preprocessing(img)
+        try:
+            img = cv2.imread(path, cv2.IMREAD_COLOR)
+            final_img = apply_preprocessing(img)
 
-        img_array = image.img_to_array(final_img)
+            img_array = image.img_to_array(final_img)
 
-        # Normalize et
-        img_array = img_array / 255.0
+            # Normalize et
+            img_array = img_array / 255.0
 
-        img_array = np.expand_dims(img_array, axis=0)
+            img_array = np.expand_dims(img_array, axis=0)
 
-        # Tahmin yap
-        predictions = self.model.predict(img_array)
+            # Tahmin yap
+            predictions = self.model.predict(img_array)
 
-        max_value = np.max(predictions)
+            max_value = np.max(predictions)
 
-        if max_value > 0.8:
-            pred = predictions.argmax()
-        else:
+            if max_value > 0.75:
+                pred = predictions.argmax()
+            else:
+                pred = -1
+        except:
             pred = -1
 
         return pred # en yüksek tahmin edilen sınıf
