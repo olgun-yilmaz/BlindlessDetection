@@ -14,8 +14,8 @@ class LoadModel:
 
     def get_model(self):
         from keras.saving.save import load_model
-        model_name = "new_model.h5"
-        model = load_model('models/' + model_name)
+        model_name = "DenseNet121"
+        model = load_model(f"models/{model_name}.h5")
         return model
 
     def get_disease(self,path):
