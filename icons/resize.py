@@ -1,6 +1,6 @@
 from PIL import Image
 
-file_name = "disease_5.jpg"
+file_name = "main_background.jpeg"
 
 image = Image.open(file_name)
 

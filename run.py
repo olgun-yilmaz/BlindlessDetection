@@ -2,10 +2,9 @@ import sys
 
 from PyQt5.QtWidgets import QApplication
 
-from src.ui.view.loading_dialog import LoadingDialog
-from src.ui.view.main_menu import MainMenu
+from src.ui.view.get_started_screen import GetStartedScreen
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    main_menu = MainMenu()
+    get_started = GetStartedScreen()
     sys.exit(app.exec_())

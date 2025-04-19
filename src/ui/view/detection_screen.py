@@ -2,11 +2,10 @@ import random
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon, QPixmap
-from PyQt5.QtWidgets import QLabel, QVBoxLayout, QDialog
+from PyQt5.QtWidgets import QLabel, QDialog
 
 from src.ai.load_model import LoadModel
-from src.module.ui_module import icon_folder, customize_widget
-
+from src.module.ui_module import icon_folder
 
 # gerekli modüller import ediliyor.
 

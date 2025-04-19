@@ -1,10 +1,12 @@
 from functools import partial
 
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QVBoxLayout, QLabel, QDialog, QHBoxLayout, QProgressBar
+from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtWidgets import QVBoxLayout, QLabel, QDialog, QHBoxLayout, QProgressBar, QWidget
 from PyQt5.QtCore import QThread, pyqtSignal, Qt, QTimer
 
 from src.module.ui_module import customize_widget, icon_folder
+from src.ui.view.main_screen import MainScreen
+
 
 # gerekli modüller import ediliyor.
 
@@ -19,17 +21,16 @@ class LoadModelThread(QThread):
         model = LoadModel(None).get_model() # modeli yükle
         self.model.emit(model)
 
-class LoadingDialog(QDialog): # yükleniyor penceresi
+class GetStartedScreen(QWidget): # yükleniyor penceresi
     def __init__(self,path=""):
         super().__init__()
         self.success = False # yükleme tamamlandı mı?
-        self.setWindowFlags(self.windowFlags() & ~Qt.WindowContextHelpButtonHint)
 
         self.num_point = 1
 
         self.color = "#2F2F2F" # koyu gri
 
-        self.estimatedCompletionTime = 13500 # yaklaşık tamamlanma süresi
+        self.estimatedCompletionTime = 6500 # yaklaşık tamamlanma süresi
 
         self.value = 0
 
@@ -40,7 +41,12 @@ class LoadingDialog(QDialog): # yükleniyor penceresi
         self.initUI()
 
     def initUI(self):
-        x,y = 500,333
+        x,y = 1600,900
+
+        background = QLabel(self)
+        background.setPixmap(QPixmap(icon_folder + "ai_background.png"))  # arka plan
+        background.adjustSize()
+
         self.setWindowTitle('Model Yükleme')
         
         self.label = QLabel(self)
@@ -72,7 +78,7 @@ class LoadingDialog(QDialog): # yükleniyor penceresi
         layout.addWidget(self.label,alignment=Qt.AlignCenter)
         layout.addWidget(self.progress_bar,alignment=Qt.AlignCenter)
         layout.addLayout(progress_layout)
-        layout.addStretch()
+        #layout.addStretch()
 
         self.timer = QTimer(self)
         self.timer.timeout.connect(partial(self.update_progress_bar, self.success))
@@ -83,9 +89,10 @@ class LoadingDialog(QDialog): # yükleniyor penceresi
         self.setLayout(layout)
         self.setFixedSize(x,y)
 
-        self.setStyleSheet("background-color: black;")
         self.setWindowIcon(QIcon(icon_folder+"loading_icon.png"))
         self.setWindowTitle("Model Yükleniyor...")
+
+        self.show()
 
     def start_loading(self,path):
         self.label.setText('Yükleniyor .')
@@ -101,6 +108,10 @@ class LoadingDialog(QDialog): # yükleniyor penceresi
         self.progress_bar.setValue(self.estimatedCompletionTime)
         QTimer.singleShot(1000,self.close) # 1 sn başarılı ekranını göster.
         self.success = True
+
+        main_screen = MainScreen(model)
+        main_screen.exec_()
+
 
     def update_progress_bar(self,success):
         try:

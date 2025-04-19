@@ -1,28 +1,23 @@
 import tkinter as tk
 from tkinter import filedialog
 
-from PyQt5.QtCore import QSize
+from PyQt5.QtCore import QSize, Qt
 from PyQt5.QtGui import QIcon, QPixmap
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QCheckBox, QLabel
+from PyQt5.QtWidgets import QVBoxLayout, QPushButton, QCheckBox, QLabel, QDialog
 
 from src.ui.view.detection_screen import DetectionScreen
 from src.module.ui_module import set_checkbox_icon, icon_folder, customize_widget, get_features
-from src.ui.view.loading_dialog import LoadingDialog
 
 
 # gerekli modüller import ediliyor.
 
-class MainMenu(QWidget):  # kullanıcının ilk karşılaştığı pencere
+class MainScreen(QDialog):  # kullanıcının ilk karşılaştığı pencere
 
-    def __init__(self):
+    def __init__(self,model=None):
         super().__init__()
         self.init_ui()
-        self.model = None
-
-    def get_model(self):
-        loader_app = LoadingDialog()
-        loader_app.exec_()
-        return loader_app.model
+        self.setWindowFlags(self.windowFlags() & ~Qt.WindowContextHelpButtonHint)
+        self.model = model
 
     def open_file(self):  # dosya işlemi yapan fonksiyon
         root = tk.Tk()
@@ -33,10 +28,8 @@ class MainMenu(QWidget):  # kullanıcının ilk karşılaştığı pencere
         if not path:  # dosya var mı?
             return
 
-        if self.model is None:
-            self.model = self.get_model()
-
-        self.go_to_detection_screen(path)
+        if not self.model is None:
+            self.go_to_detection_screen(path)
 
 
     def click(self):  # seçme butonlarına tıklandığında çağrılan fonksiyon
@@ -76,16 +69,16 @@ class MainMenu(QWidget):  # kullanıcının ilk karşılaştığı pencere
 
     def init_ui(self):
         x,y = 1600,900  # pencere boyutu
-        button_size = 100  # buton ikonu boyutu
+        button_size = 300  # buton ikonu boyutu
 
         background = QLabel(self)
-        background.setPixmap(QPixmap(icon_folder + "main_background.jpg"))  # arka plan
+        background.setPixmap(QPixmap(icon_folder + "main_background.jpeg"))  # arka plan main_background.png
         background.adjustSize()
 
         open_button = QPushButton(self)  # dosya yükleme butonu
         open_button.setToolTip("DOSYA YÜKLE")
 
-        open_button.setIcon(QIcon(icon_folder + "load_button.png"))
+        open_button.setIcon(QIcon(icon_folder)) # null
         open_button.setIconSize(QSize(button_size, button_size))
         open_button.setStyleSheet(get_features(color="white"))
 
@@ -99,4 +92,3 @@ class MainMenu(QWidget):  # kullanıcının ilk karşılaştığı pencere
         self.setWindowTitle("BLINDLESS DETECTION")
         self.setFixedSize(x, y)
         self.setWindowIcon(QIcon(icon_folder+"doctor.png"))
-        self.show()
