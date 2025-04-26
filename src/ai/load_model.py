@@ -14,7 +14,7 @@ class LoadModel:
 
     def get_model(self):
         from keras.saving.save import load_model
-        model_name = "DenseNet121"
+        model_name = "DenseNet169_128px"
         model = load_model(f"models/{model_name}.h5")
         return model
 

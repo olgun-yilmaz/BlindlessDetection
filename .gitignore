@@ -1,2 +1,4 @@
 dataset/
 models/
+dataset_try/
+src/ai/try_preprocess.ipynb

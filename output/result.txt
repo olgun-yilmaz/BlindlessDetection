@@ -1,28 +1,23 @@
-19 epochs -> 128*128 img_size:
+20 epochs -> 96*96 img_size :
 
-    DenseNet169 :
+    EfficientNetB0 (better preprocess) :
 
         accuracy :
-             0.625
-            cr :
-                           precision    recall  f1-score   support
+         0.6614583333333334
+        cr :
+                       precision    recall  f1-score   support
 
-                       0       0.87      0.91      0.89       192
-                       1       0.56      0.64      0.60       192
-                       2       0.43      0.54      0.48       192
-                       3       0.69      0.56      0.62       192
-                       4       0.65      0.47      0.55       192
+                   0       0.86      0.96      0.91       192
+                   1       0.74      0.50      0.60       192
+                   2       0.43      0.82      0.56       192
+                   3       0.82      0.51      0.63       192
+                   4       0.77      0.52      0.62       192
 
-                accuracy                           0.62       960
-               macro avg       0.64      0.62      0.63       960
-            weighted avg       0.64      0.62      0.63       960
-
+            accuracy                           0.66       960
+           macro avg       0.72      0.66      0.66       960
+        weighted avg       0.72      0.66      0.66       960
 
 ----------------------------------------------------------------
-
-
-
-19 epochs -> 96*96 img_size :
 
     DenseNet121 :
 
