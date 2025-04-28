@@ -1,6 +1,6 @@
 from PIL import Image
 
-file_name = "main_background.jpeg"
+file_name = "ai_background.png"
 
 image = Image.open(file_name)
 

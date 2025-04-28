@@ -30,7 +30,7 @@ class GetStartedScreen(QWidget): # yükleniyor penceresi
 
         self.color = "#2F2F2F" # koyu gri
 
-        self.estimatedCompletionTime = 7500 # yaklaşık tamamlanma süresi
+        self.estimatedCompletionTime = 3000 # yaklaşık tamamlanma süresi
 
         self.value = 0
 

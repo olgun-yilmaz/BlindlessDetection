@@ -1,3 +1,23 @@
+16 epochs -> 128*128 img_size :
+
+    EfficientNetB1:
+        accuracy :
+         0.7041666666666667
+        cr :
+                       precision    recall  f1-score   support
+
+                   0       0.84      0.98      0.91       192
+                   1       0.76      0.61      0.68       192
+                   2       0.48      0.82      0.61       192
+                   3       0.88      0.53      0.66       192
+                   4       0.80      0.57      0.67       192
+
+            accuracy                           0.70       960
+           macro avg       0.75      0.70      0.70       960
+        weighted avg       0.75      0.70      0.70       960
+
+----------------------------------------------------------------
+
 20 epochs -> 96*96 img_size :
 
     EfficientNetB0 (better preprocess) :
