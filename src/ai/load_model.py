@@ -14,7 +14,7 @@ class LoadModel:
 
     def get_model(self):
         from keras.saving.save import load_model
-        model_name = "EfficientNetB1_new"
+        model_name = "EfficientNetB0_new"
         model = load_model(f"models/{model_name}.h5")
         return model
 
